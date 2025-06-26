@@ -9,7 +9,7 @@ This repository contains the prototype implementation of the **EviDent-ML** fram
 
 The prototype provides a user interface for exploring the evidence-based data requirements specification process. It simulates the flow of expert interaction, confidence assessment, and visualization of training data quality as per the EviDent-ML framework.
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - **HTML5**
 - **CSS3**
