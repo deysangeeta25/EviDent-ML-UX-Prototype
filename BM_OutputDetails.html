@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>EviDent-ML</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection, tv" />
+<link rel="stylesheet" href="css/style-print.css" type="text/css" media="print" />
+<style>
+    .confidence-values {
+        margin: 10px 0;
+        padding: 10px;
+        background: #f5f5f5;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .value-item {
+        margin: 5px 0;
+        display: inline-block;
+        margin-right: 20px;
+    }
+    .scale-container {
+        width: 60%;
+        height: 60px;
+        margin: 30px 0;
+        margin-left: 20%;
+        position: relative;
+        box-sizing: border-box;
+    }
+    .labels {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 12px;
+        margin-bottom: 3px;
+    }
+    .label {
+        text-align: center;
+        font-size: 10px;
+        color: #333;
+        flex: 1;
+    }
+    .scale {
+        width: 100%;
+        height: 15px;
+        background: #ddd;
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .scale-values {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        height: 12px;
+        margin-top: 3px;
+        position: relative;
+    }
+    .value {
+        position: absolute;
+        transform: translateX(-50%);
+        font-size: 10px;
+        color: #666;
+    }
+    .tree-container {
+        margin-top: 30px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 20px 20px;
+        margin-bottom: 20px;
+    }
+    .tree-container ul {
+        list-style-type: none;
+        padding-left: 20px;
+        margin: 0;
+    }
+    .tree-container li {
+        margin: 5px 0;
+    }
+    .value-pair {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 3px;
+    }
+    .value-pair span:first-child {
+        min-width: 100px;
+    }
+    .nested {
+        display: none;
+    }
+    .caret {
+        cursor: pointer;
+        user-select: none;
+    }
+    .caret::before {
+        content: "\25B6";
+        color: black;
+        display: inline-block;
+        margin-right: 6px;
+    }
+    .caret-down::before {
+        transform: rotate(90deg);
+    }
+    .active {
+        display: block;
+    }
+    .box-in {
+        padding-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+<div id="wrapper">
+  <div class="title">
+    <div class="title-top">
+      <div class="title-left">
+        <div class="title-right">
+          <div class="title-bottom">
+            <div class="title-top-left">
+              <div class="title-bottom-left">
+                <div class="title-top-right">
+                  <div class="title-bottom-right">
+                    <h1><a href="http://all-free-download.com/free-website-templates/">EviDent-ML: <span>Evidence-based Data Requirements Engineering and Data Quality Assessment for ML-based Critical Systems</span> </a></h1>
+                    <p>A Tool Support for the Framework</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr class="noscreen" />
+  <div class="content">
+    <div class="column-left">
+      <h3>MENU</h3>
+      <a href="#skip-menu" class="hidden">Skip menu</a>
+      <ul class="menu">
+        <li><a href="index.html" >About</a></li>
+        <li><a href="menu_calculate.html"> Collective Confidence Calculation </a></li>
+        <li><a href="BeliefMass_output.html"class="active">Belief Mass Analysis</a></li>
+        <li><a href="download.html">Templates </a></li>
+      </ul>
+    </div>
+    <div id="skip-menu"></div>
+    <div class="column-right">
+      <div class="box">
+        <div class="box-top"></div>
+        <div class="box-in">
+          <h2><strong>Belief Mass Analysis</strong></h2>
+           <div class="box-top"></div>
+       
+           <h2>Confidence in Representativeness Requirements Satisfaction</h2>
+           
+           <div class="box-in">
+               <div class="confidence-values">
+                   <div class="value-item">
+                       <span>Belief: </span>
+                       <span id="belief">0</span>
+                   </div>
+                   <div class="value-item">
+                       <span>Plausibility: </span>
+                       <span id="plausibility">0</span>
+                   </div>
+                   <div class="value-item">
+                       <span>Disbelief: </span>
+                       <span id="disbelief">0</span>
+                   </div>
+                   <div class="value-item">
+                       <span>Uncertainty: </span>
+                       <span id="uncertainty">0</span>
+                   </div>
+               </div>
+
+               <div class="scale-container">
+                   <div class="labels" id="labelContainer"></div>
+                   <div class="scale" id="scaleBar"></div>
+                   <div class="scale-values" id="markerContainer"></div>
+               </div>
+
+               <div class="tree-container">
+                   <ul id="tree">
+                       <li>
+                           <span class="caret">Trust in Collection Requirements Satisfaction</span>
+                           <ul class="nested">
+                               <li>
+                                   <span class="caret">Belief Mass (ML Expert)</span>
+                                   <ul class="nested">
+                                       <li class="value-pair">
+                                           <span>m(safe):</span>
+                                           <span id="beliefML">0</span>
+                                       </li>
+                                       <li class="value-pair">
+                                           <span>m(unsafe):</span>
+                                           <span id="disbeliefML">0</span>
+                                       </li>
+                                       <li class="value-pair">
+                                           <span>m(safe,unsafe):</span>
+                                           <span id="uncertaintyML">0</span>
+                                       </li>
+                                   </ul>
+                               </li>
+                               <li>
+                                   <span class="caret">Belief Mass (Sys/domain Expert)</span>
+                                   <ul class="nested">
+                                       <li class="value-pair">
+                                           <span>m(safe):</span>
+                                           <span id="beliefSys">0</span>
+                                       </li>
+                                       <li class="value-pair">
+                                           <span>m(unsafe):</span>
+                                           <span id="disbeliefSys">0</span>
+                                       </li>
+                                       <li class="value-pair">
+                                           <span>m(safe,unsafe):</span>
+                                           <span id="uncertaintySys">0</span>
+                                       </li>
+                                   </ul>
+                               </li>
+                           </ul>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+        </div>
+      </div>
+      <div class="box-bottom">
+        <hr class="noscreen" />
+        <div class="footer-info-left"><a href="http://all-free-download.com/free-website-templates/">EviDent-ML@Ajou</a>, 2025. All rights reserved.</div>
+      </div>
+    </div>
+    <div class="cleaner">&nbsp;</div>
+  </div>
+</div>
+
+<script src="results_scripts2.js"></script>
+<script src="BM_OutputDetails.js"></script>
+<script src="results_scripts_BMDetails.js"></script>
+
+</body>
+</html>
